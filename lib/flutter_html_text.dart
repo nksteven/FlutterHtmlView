@@ -38,7 +38,8 @@ class HtmlText extends StatelessWidget {
   }
 
   TextSpan _textSpan(Map node) {
-    TextSpan span = new TextSpan(text: node['text'], style: node['style']);
+    TextSpan span = new TextSpan(
+        text: node['text'].replaceAll("&nbsp;", " "), style: node['style']);
 
     return span;
   }
