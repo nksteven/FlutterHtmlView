@@ -5,29 +5,29 @@ class HtmlTextView extends StatelessWidget {
   final String data;
   final EdgeInsets contentsPadding;
   final EdgeInsets textPadding;
+  final Function textCallBack;
 
   HtmlTextView({
     this.data,
     this.contentsPadding,
-    this.textPadding
+    this.textPadding,
+    this.textCallBack,
   });
 
   @override
   Widget build(BuildContext context) {
     HtmlParser htmlParser = new HtmlParser();
 
-    List<Widget> nodes = htmlParser.HParse(this.data, textPadding: textPadding);
+    List<Widget> nodes = htmlParser.HParse(this.data,
+        textPadding: textPadding, textCallBack: textCallBack);
 
     return new Container(
-        padding: contentsPadding == null ? const EdgeInsets.all(5.0) : contentsPadding,
-        child:  new Column(
+        padding: contentsPadding == null
+            ? const EdgeInsets.all(5.0)
+            : contentsPadding,
+        child: new Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: nodes,
-        )
-
-    );
+        ));
   }
 }
-
-
-

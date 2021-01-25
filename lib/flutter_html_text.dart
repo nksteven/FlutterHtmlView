@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 class HtmlText extends StatelessWidget {
   final String data;
   final EdgeInsets textPadding;
+  final Function textCallBack;
 
-  HtmlText({this.data, this.textPadding});
+  HtmlText({this.data, this.textPadding, this.textCallBack});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,14 @@ class HtmlText extends StatelessWidget {
 
   TextSpan _textSpan(Map node) {
     TextSpan span = new TextSpan(
-        text: node['text'].replaceAll("&nbsp;", " "), style: node['style']);
+        text: node['text'].replaceAll("&nbsp;", " "),
+        style: node['style'],
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            if (node['href'] != '' && textCallBack != null) {
+              textCallBack(node['href']);
+            }
+          });
 
     return span;
   }

@@ -6,7 +6,8 @@ import 'package:flutter_html_textview/flutter_html_text.dart';
 class HtmlParser {
   HtmlParser();
 
-  List<Widget> HParse(String html, {EdgeInsets textPadding}) {
+  List<Widget> HParse(String html,
+      {EdgeInsets textPadding, Function textCallBack}) {
     List<Widget> widgetList = new List();
 
     dom.Document document = parse(html);
@@ -41,6 +42,7 @@ class HtmlParser {
         widgetList.add(new HtmlText(
           data: e.outerHtml,
           textPadding: textPadding,
+          textCallBack: textCallBack,
         ));
       }
     });
